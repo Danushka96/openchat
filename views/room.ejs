@@ -5,27 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/socket.io/socket.io.js" defer></script>
     <script src="script.js" defer></script>
-    <title>Document</title>
-    <script>
-        const ROOM_ID = "<%= roomId %>"
-    </script>
-    <style>
-        #video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, 300px);
-            grid-auto-rows: 300px;
-        }
-
-        video {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css" />
+    <title>Open Chat</title>
 </head>
 <body>
-    <div id="video-grid"></div>
-    <input type="text" id="content">
-    <button id="send">Send</button>
+<section class="msger">
+    <header class="msger-header">
+        <div class="msger-header-title">
+            <i class="fas fa-comment-alt"></i> Open Chat
+        </div>
+        <div class="" style="margin-right: -50%">
+            <p>online : <%= online %> </p>
+        </div>
+        <div class="msger-header-options">
+            <span><i class="fas fa-cog"></i></span>
+        </div>
+    </header>
+
+    <main class="msger-chat" style="overflow-y: scroll; height:400px;" id="message-section">
+    <!--    message content goes here    -->
+    </main>
+
+    <form class="msger-inputarea" onsubmit="event.preventDefault();">
+        <input type="text" class="msger-input" placeholder="Enter your message..." id="content" autocomplete="off">
+        <button class="msger-send-btn" id="send" disabled>Send</button>
+    </form>
+</section>
 </body>
 </html>

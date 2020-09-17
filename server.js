@@ -7,14 +7,10 @@ const { v4: uuidV4 } = require('uuid')
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
-var allSockets = [];
+global.allSockets = [];
 
 app.get('/', (req, res) => {
-    res.redirect(`/${uuidV4()}`)
-})
-
-app.get('/:room', (req, res) => {
-    res.render('room', { roomId: req.params.room })
+    res.render('room', { online: allSockets.length })
 })
 
 io.on('connect', socket => {
@@ -24,6 +20,10 @@ io.on('connect', socket => {
         findMatch(socket);
 
         socket.on('disconnect', () => {
+            let socketData = getSocketData(socket.id)
+            if (socketData !== -1){
+                socket.to(socketData.room).emit('client-disconnected')
+            }
             removeSocket(socket.id)
         })
     })
@@ -41,21 +41,40 @@ function findMatch(socket){
         unmatched[0].socket.join(randomRoom);
         io.to(socket.id).emit('user-matched', randomRoom)
         io.to(unmatched[0].socket.id).emit('user-matched', randomRoom)
-        updateUserMatched(socket.id, true);
-        updateUserMatched(unmatched[0].socket.id, true);
+        updateUserMatched(socket.id, true, randomRoom);
+        updateUserMatched(unmatched[0].socket.id, true, randomRoom);
     }
-    console.log('hi')
+    printSockets(socket);
 }
 
-function updateUserMatched(socketId, matched){
+function updateUserMatched(socketId, matched, room){
     let matchedSocket = allSockets.filter(socketObj => socketObj.socket.id === socketId);
     if (matchedSocket.length > 0){
         matchedSocket[0].match = (matched) ? 0 : -1;
+        matchedSocket[0].client = socketId
+        matchedSocket[0].room = room
     }
 }
 
 function removeSocket(socketId){
-    allSockets.splice(allSockets.findIndex(s => s.id === socketId), 1);
+    allSockets.splice(allSockets.findIndex(s => s.socket.id === socketId), 1);
+    console.log('hi')
+}
+
+function printSockets(socket){
+    console.log(`Me : ${socket.id}`);
+    allSockets.forEach(socket => {
+        console.log(socket.socket.id + " > " + socket.match)
+    })
+}
+
+function getSocketData(socketId){
+    let sockets = allSockets.filter(socketObj => socketObj.socket.id === socketId);
+    if (sockets.length > 0){
+        return sockets[0]
+    } else {
+        return -1;
+    }
 }
 
 server.listen(3000)

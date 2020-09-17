@@ -44,7 +44,7 @@ function findMatch(socket){
         updateUserMatched(socket.id, true, randomRoom);
         updateUserMatched(unmatched[0].socket.id, true, randomRoom);
     }
-    printSockets(socket);
+    // printSockets(socket);
 }
 
 function updateUserMatched(socketId, matched, room){

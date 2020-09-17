@@ -1,0 +1,31 @@
+name: deploy
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: install npm packages
+        run: npm install
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
+          registry: docker.pkg.github.com
+          repository: danushka96/openchat/openchat
+          tag_with_ref: true

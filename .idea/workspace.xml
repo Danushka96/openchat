@@ -23,6 +23,9 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Danushka Herath\Documents\openchat" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Danushka Herath\Documents\openchat\public" />
     </key>
@@ -52,7 +55,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1600333515779</updated>
-      <workItem from="1600333516848" duration="21438000" />
+      <workItem from="1600333516848" duration="22115000" />
     </task>
     <servers />
   </component>

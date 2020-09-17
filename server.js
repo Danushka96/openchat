@@ -58,7 +58,7 @@ function updateUserMatched(socketId, matched, room){
 
 function removeSocket(socketId){
     allSockets.splice(allSockets.findIndex(s => s.socket.id === socketId), 1);
-    console.log('hi')
+    // console.log('hi')
 }
 
 function printSockets(socket){

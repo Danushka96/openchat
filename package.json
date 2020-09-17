@@ -1,0 +1,35 @@
+{
+  "name": "openchat",
+  "version": "1.0.0",
+  "description": "Opensource video chat application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "devStart": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/danushka96/openchat.git"
+  },
+  "keywords": [
+    "chat",
+    "webrtc",
+    "video-chat",
+    "node"
+  ],
+  "author": "Danushka Herath",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danushka96/openchat/issues"
+  },
+  "homepage": "https://github.com/danushka96/openchat#readme",
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0",
+    "uuid": "^8.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}

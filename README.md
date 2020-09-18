@@ -9,7 +9,7 @@ Chat with random strangers
 
 ![](https://i.imgur.com/TdRDHhW.png)
 
-
+![](https://i.imgur.com/7GrnaGa.png)
 
 ## How to setup
 
